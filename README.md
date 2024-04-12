@@ -8,7 +8,7 @@ Este é um programa simples que permite comparar dois arquivos Excel e identific
 - **Destaque de Diferenças:** As diferenças são destacadas para facilitar a identificação.
 - **Fácil de Usar:** Interface intuitiva para uma experiência de usuário sem complicações.
 
-  ## Recursos:
-  - **Arquivo Executável:** Na pasta Dist encontra-se o arquivo pronto para executar.
+## Aplicação:
+- **Arquivo Executável:** Na pasta Dist encontra-se o arquivo pronto para executar.
 
 ![Imagem Ilustrativa](ManipuladorDeExcel.png)
