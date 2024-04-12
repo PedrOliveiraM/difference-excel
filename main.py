@@ -18,18 +18,27 @@ def abrir_arquivo_base():
         tabelas = wb.sheetnames
         return tabelas
 
-def selecionarTabelas():
-    tabelas = abrir_arquivo_base()
-    if tabelas:
-        combo['values'] = tabelas
-        
-        
 def abrir_arquivo_cmp():
     filename = filedialog.askopenfilename(initialdir="/", title="Selecione o arquivo Excel",
                                           filetypes=(("Arquivos Excel", "*.xlsx"), ("Todos os arquivos", "*.*")))
     if filename:
         caminho_arquivo_cmp.delete(0, tk.END)
         caminho_arquivo_cmp.insert(0, filename)
+        wb = load_workbook(filename)
+        tabelas = wb.sheetnames
+        return tabelas
+        
+        
+def selecionarTabelasBase():
+    tabelas = abrir_arquivo_base()
+    if tabelas:
+        comboBase['values'] = tabelas
+        
+def selecionarTabelasCMP():
+    tabelas = abrir_arquivo_cmp()
+    if tabelas:
+        comboCMP['values'] = tabelas
+        
         
 def local_save():
     file_path = filedialog.asksaveasfilename(defaultextension=".xlsx")
@@ -41,8 +50,8 @@ def comparar_planilhas():
     arquivo_base = caminho_arquivo_base.get()
     arquivo_cmp = caminho_arquivo_cmp.get()
     arquivo_save = caminho_arquivo_save.get()
-    nome_tabela_base = nome_tabela_base_entry.get()
-    nome_tabela_cmp = nome_tabela_cmp_entry.get()
+    nome_tabela_base = comboBase.get()
+    nome_tabela_cmp = comboCMP.get()
 
     if arquivo_base and arquivo_cmp and nome_tabela_base and nome_tabela_cmp:
         try:
@@ -75,7 +84,7 @@ frame.pack(padx=10, pady=10)
 
 
 title = tk.Label(frame, text= "Comparador de Planilhas Excel",font=("Arial",28,"bold"))
-title.grid(row=0, column=0, columnspan=2, padx=10, pady=5)
+title.grid(row=0, column=0, columnspan=2, padx=10, pady=15)
 
 # ---------------------------------------------------------------------------------------------------------
                     # BASE
@@ -88,7 +97,7 @@ comboBase = ttk.Combobox(frame, state="readonly", width=38)
 comboBase.grid(row=2,column=1,padx=5, pady=5)
 
 
-botao_arq_base = tk.Button(frame, text="Selecionar Arquivo Base Excel", command=selecionarTabelas)
+botao_arq_base = tk.Button(frame, text="Selecionar Arquivo Base Excel", command=selecionarTabelasBase)
 botao_arq_base.grid(row=1, column=0, padx=10, pady=5)  # Adicionando padx e pady
 
 caminho_arquivo_base = tk.Entry(frame, width=40)
@@ -99,7 +108,7 @@ caminho_arquivo_base.grid(row=1, column=1, padx=10, pady=5)  # Adicionando padx 
                     #COMPARAÇÃO
                             
  
-botao_arq_comp = tk.Button(frame, text="Selecionar Arquivo para Comparar", command=abrir_arquivo_cmp)
+botao_arq_comp = tk.Button(frame, text="Selecionar Arquivo para Comparar", command=selecionarTabelasCMP)
 botao_arq_comp.grid(row=3, column=0, padx=10, pady=5)  # Adicionando padx e pady
 
 caminho_arquivo_cmp = tk.Entry(frame, width=40)
@@ -126,6 +135,6 @@ caminho_arquivo_save.grid(row=5, column=1, padx=10, pady=5)  # Adicionando padx 
 # ---------------------------------------------------------------------------------------------------------
 
 botao_comparar = tk.Button(frame, text="Comparar", command=comparar_planilhas , width=20, height=2 , font=("Arial",12,"bold"))
-botao_comparar.grid(row=6, column=0, columnspan=2, padx=10, pady=5)  # Adicionando padx e pady
+botao_comparar.grid(row=6, column=0, columnspan=2, padx=10, pady=15)  # Adicionando padx e pady
 
 root.mainloop()
