@@ -8,4 +8,4 @@ Este é um programa simples que permite comparar dois arquivos Excel e identific
 - **Destaque de Diferenças:** As diferenças são destacadas para facilitar a identificação.
 - **Fácil de Usar:** Interface intuitiva para uma experiência de usuário sem complicações.
 
-
+![Imagem Ilustrativa](/home/pedro/Documents/Estagio/cmpPlanilhas.ManipuladorDeExcel.png)
